@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% block title %}Training - Fake News Detection{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-primary">
+                <i class="fas fa-cogs"></i> Model Training
+            </h1>
+            <p class="lead text-muted">
+                Instructions for training and setting up the machine learning models
+            </p>
+        </div>
+
+        <!-- Status Card -->
+        <div class="card mb-5">
+            <div class="card-header {% if models_exist %}bg-success{% else %}bg-warning{% endif %} text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-{% if models_exist %}check-circle{% else %}exclamation-triangle{% endif %}"></i>
+                    Model Status
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if models_exist %}
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">
+                        <i class="fas fa-check-circle"></i> Models Ready!
+                    </h4>
+                    <p>
+                        All machine learning models have been trained and are ready to use. 
+                        You can now analyze news articles using the web interface.
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        <a href="{{ url_for('index') }}" class="btn btn-success">
+                            <i class="fas fa-arrow-right"></i> Start Analyzing News
+                        </a>
+                    </p>
+                </div>
+                {% else %}
+                <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">
+                        <i class="fas fa-exclamation-triangle"></i> Models Not Found
+                    </h4>
+                    <p>
+                        The machine learning models have not been trained yet. 
+                        Follow the instructions below to train the models first.
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Training Instructions -->
+        <div class="card mb-5">
+            <div class="card-header bg-info text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-graduation-cap"></i> Training Instructions
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Step 1: Prepare Your Environment</h5>
+                        <p>Make sure you have the required dependencies installed:</p>
+                        
+                        <div class="bg-dark text-light p-3 rounded mb-3">
+                            <code>pip install -r requirements.txt</code>
+                        </div>
+                        
+                        <h5>Step 2: Verify Dataset Files</h5>
+                        <p>Ensure your dataset files are in the correct location:</p>
+                        <ul>
+                            <li><code>NLP_Analysis/True.csv</code> - Real news articles</li>
+                            <li><code>NLP_Analysis/Fake.csv</code> - Fake news articles</li>
+                        </ul>
+                        
+                        <h5>Step 3: Train the Models</h5>
+                        <p>Run the training script to create the machine learning models:</p>
+                        
+                        <div class="bg-dark text-light p-3 rounded mb-3">
+                            <code>python fake_news_detection.py</code>
+                        </div>
+                        
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Note:</strong> Training may take several minutes depending on your system. 
+                            The script will automatically save the trained models for future use.
+                        </div>
+                        
+                        <h5>Step 4: Verify Training</h5>
+                        <p>After training completes, you should see these files created:</p>
+                        <ul>
+                            <li><code>fake_news_model_vectorizer.pkl</code> - Text vectorizer</li>
+                            <li><code>fake_news_model_logistic_regression.pkl</code> - Logistic Regression model</li>
+                            <li><code>fake_news_model_naive_bayes.pkl</code> - Naive Bayes model</li>
+                            <li><code>fake_news_model_svm.pkl</code> - SVM model</li>
+                            <li><code>model_performance_comparison.png</code> - Performance visualization</li>
+                            <li><code>confusion_matrices.png</code> - Confusion matrices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Test -->
+        <div class="card mb-5">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-flask"></i> Quick Test
+                </h3>
+            </div>
+            <div class="card-body">
+                <p>After training, you can test the models using the test script:</p>
+                
+                <div class="bg-dark text-light p-3 rounded mb-3">
+                    <code>python test_models.py</code>
+                </div>
+                
+                <p>This will run a quick test to verify that all models are working correctly.</p>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="card mb-5">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-tools"></i> Troubleshooting
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="troubleshootingAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                <i class="fas fa-question-circle me-2"></i>Dataset Files Not Found
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                            <div class="accordion-body">
+                                <p><strong>Problem:</strong> Error message about missing CSV files</p>
+                                <p><strong>Solution:</strong></p>
+                                <ul>
+                                    <li>Ensure <code>True.csv</code> and <code>Fake.csv</code> are in the <code>NLP_Analysis/</code> folder</li>
+                                    <li>Check that the files contain the required columns: title, text, subject, date</li>
+                                    <li>Verify file permissions allow reading</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                <i class="fas fa-question-circle me-2"></i>Import Errors
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                            <div class="accordion-body">
+                                <p><strong>Problem:</strong> ModuleNotFoundError when running scripts</p>
+                                <p><strong>Solution:</strong></p>
+                                <ul>
+                                    <li>Install required dependencies: <code>pip install -r requirements.txt</code></li>
+                                    <li>Activate your virtual environment if using one</li>
+                                    <li>Check Python version compatibility (Python 3.7+)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                <i class="fas fa-question-circle me-2"></i>Training Takes Too Long
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                            <div class="accordion-body">
+                                <p><strong>Problem:</strong> Training process is very slow</p>
+                                <p><strong>Solution:</strong></p>
+                                <ul>
+                                    <li>Reduce dataset size for testing (sample the data)</li>
+                                    <li>Decrease TF-IDF max_features parameter</li>
+                                    <li>Use a more powerful machine</li>
+                                    <li>Close other applications to free up memory</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                <i class="fas fa-question-circle me-2"></i>Web App Not Loading Models
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                            <div class="accordion-body">
+                                <p><strong>Problem:</strong> Web application shows "Models not loaded"</p>
+                                <p><strong>Solution:</strong></p>
+                                <ul>
+                                    <li>Ensure all .pkl files are in the project root directory</li>
+                                    <li>Check file permissions</li>
+                                    <li>Restart the Flask application after training</li>
+                                    <li>Verify the model files are not corrupted</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Expectations -->
+        <div class="card mb-5">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-chart-line"></i> Expected Performance
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h4 class="text-primary">96%</h4>
+                            <p class="text-muted">Logistic Regression Accuracy</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h4 class="text-success">93%</h4>
+                            <p class="text-muted">Naive Bayes Accuracy</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h4 class="text-info">95%</h4>
+                            <p class="text-muted">SVM Accuracy</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-3" role="alert">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> Actual performance may vary based on your dataset characteristics and system specifications.
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="text-center">
+            {% if models_exist %}
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-arrow-right"></i> Start Using the Web App
+            </a>
+            {% else %}
+            <p class="text-muted">Train the models first, then return to this page to verify they're ready.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

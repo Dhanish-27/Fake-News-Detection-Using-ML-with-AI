@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+
+{% block title %}About - Fake News Detection{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-primary">
+                <i class="fas fa-info-circle"></i> About Fake News Detection
+            </h1>
+            <p class="lead text-muted">
+                Understanding how our machine learning system works to detect fake news
+            </p>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="card mb-5">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-project-diagram"></i> Project Overview
+                </h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    This fake news detection system uses advanced Natural Language Processing (NLP) and Machine Learning 
+                    techniques to analyze news articles and classify them as either real or fake. The system employs 
+                    three different machine learning algorithms to provide robust and accurate predictions.
+                </p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-4 text-center">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body">
+                                <i class="fas fa-database fa-3x text-primary mb-3"></i>
+                                <h5>Dataset</h5>
+                                <p class="text-muted">Trained on thousands of real and fake news articles</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body">
+                                <i class="fas fa-brain fa-3x text-success mb-3"></i>
+                                <h5>ML Models</h5>
+                                <p class="text-muted">Three different algorithms for robust analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body">
+                                <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
+                                <h5>High Accuracy</h5>
+                                <p class="text-muted">Up to 96% accuracy in fake news detection</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Machine Learning Models -->
+        <div class="card mb-5">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-cogs"></i> Machine Learning Models
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for model_name, info in model_info.items() %}
+                    <div class="col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">{{ model_name }}</h5>
+                                <small class="text-muted">Accuracy: {{ info.accuracy }}</small>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ info.description }}</p>
+                                
+                                <h6>Strengths:</h6>
+                                <ul class="list-unstyled">
+                                    {% for strength in info.strengths %}
+                                    <li><i class="fas fa-check text-success"></i> {{ strength }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="card mb-5">
+            <div class="card-header bg-info text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-microscope"></i> Technical Implementation
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-language"></i> Text Preprocessing</h5>
+                        <ul>
+                            <li>URL and email removal</li>
+                            <li>Special character cleaning</li>
+                            <li>Lowercase conversion</li>
+                            <li>Whitespace normalization</li>
+                        </ul>
+                        
+                        <h5><i class="fas fa-chart-bar"></i> Feature Extraction</h5>
+                        <ul>
+                            <li>TF-IDF vectorization</li>
+                            <li>5000 most important features</li>
+                            <li>Unigrams and bigrams</li>
+                            <li>English stopwords removal</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-tools"></i> Technologies Used</h5>
+                        <ul>
+                            <li><strong>Python:</strong> Core programming language</li>
+                            <li><strong>scikit-learn:</strong> Machine learning library</li>
+                            <li><strong>Flask:</strong> Web framework</li>
+                            <li><strong>Bootstrap:</strong> Frontend styling</li>
+                            <li><strong>pandas:</strong> Data manipulation</li>
+                            <li><strong>numpy:</strong> Numerical computing</li>
+                        </ul>
+                        
+                        <h5><i class="fas fa-chart-pie"></i> Evaluation Metrics</h5>
+                        <ul>
+                            <li>Accuracy</li>
+                            <li>Precision</li>
+                            <li>Recall</li>
+                            <li>F1-Score</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="card mb-5">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-question-circle"></i> How It Works
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker bg-primary"></div>
+                                <div class="timeline-content">
+                                    <h5>1. Text Input</h5>
+                                    <p>User enters a news article for analysis</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker bg-success"></div>
+                                <div class="timeline-content">
+                                    <h5>2. Preprocessing</h5>
+                                    <p>Text is cleaned and normalized for analysis</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker bg-info"></div>
+                                <div class="timeline-content">
+                                    <h5>3. Feature Extraction</h5>
+                                    <p>Text is converted to numerical features using TF-IDF</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker bg-warning"></div>
+                                <div class="timeline-content">
+                                    <h5>4. Model Prediction</h5>
+                                    <p>Selected ML model analyzes the features</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker bg-danger"></div>
+                                <div class="timeline-content">
+                                    <h5>5. Results</h5>
+                                    <p>Prediction and confidence scores are displayed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Limitations -->
+        <div class="card mb-5">
+            <div class="card-header bg-danger text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-exclamation-triangle"></i> Limitations & Considerations
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Important:</strong> This tool is for educational and research purposes. 
+                    Always verify news from multiple reliable sources.
+                </div>
+                
+                <ul>
+                    <li><strong>Domain Specificity:</strong> Models are trained on specific datasets and may not generalize to all news types</li>
+                    <li><strong>Language Dependency:</strong> Currently optimized for English text only</li>
+                    <li><strong>Context Awareness:</strong> May miss nuanced contextual information</li>
+                    <li><strong>Bias:</strong> Performance depends on training data quality and representativeness</li>
+                    <li><strong>False Positives/Negatives:</strong> No model is 100% accurate</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- API Information -->
+        <div class="card mb-5">
+            <div class="card-header bg-dark text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-code"></i> API Endpoints
+                </h3>
+            </div>
+            <div class="card-body">
+                <p>This application provides several API endpoints for integration:</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Endpoint</th>
+                                <th>Method</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>/predict</code></td>
+                                <td>POST</td>
+                                <td>Analyze news text and return prediction</td>
+                            </tr>
+                            <tr>
+                                <td><code>/api/models</code></td>
+                                <td>GET</td>
+                                <td>Get available models and their information</td>
+                            </tr>
+                            <tr>
+                                <td><code>/api/stats</code></td>
+                                <td>GET</td>
+                                <td>Get dataset statistics</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center">
+            <p class="text-muted">
+                <i class="fas fa-heart text-danger"></i> 
+                Built with passion for combating misinformation
+            </p>
+            <p class="small text-muted">
+                For questions or contributions, please refer to the project documentation.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -35px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #dee2e6;
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 20px;
+    width: 2px;
+    height: calc(100% + 10px);
+    background: #dee2e6;
+}
+</style>
+{% endblock %}

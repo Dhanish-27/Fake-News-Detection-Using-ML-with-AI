@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Error - Fake News Detection{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="text-center">
+            <div class="error-code display-1 text-primary">
+                {{ error_code }}
+            </div>
+            
+            <h2 class="text-muted mb-4">{{ error_message }}</h2>
+            
+            <p class="lead text-muted mb-5">
+                {% if error_code == 404 %}
+                The page you're looking for doesn't exist. It might have been moved or deleted.
+                {% elif error_code == 500 %}
+                Something went wrong on our end. We're working to fix this issue.
+                {% else %}
+                An unexpected error occurred. Please try again later.
+                {% endif %}
+            </p>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-home"></i> Go Home
+                </a>
+                <button onclick="history.back()" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </button>
+            </div>
+            
+            <div class="mt-5">
+                <p class="text-muted">
+                    If this problem persists, please check your internet connection or try refreshing the page.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.error-code {
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %}
