@@ -1,16 +1,3 @@
-"""
-Flask Web Application for Fake News Detection
-============================================
-
-A web interface for the fake news detection system that allows users to:
-- Input news articles for classification
-- Choose between different ML models
-- View confidence scores and detailed results
-- See model performance metrics
-
-Author: AI Assistant
-Date: 2025
-"""
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
 import os
@@ -317,3 +304,4 @@ if __name__ == '__main__':
     print("="*60)
     
     app.run(debug=True, host='127.0.0.1', port=5000)
+
